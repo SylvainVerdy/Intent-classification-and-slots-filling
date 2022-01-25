@@ -5,16 +5,9 @@ Authors
  * Sylvain Verdy, December 2021
 """
 
-
-from ast import Mod
-from asyncio.events import BaseDefaultEventLoopPolicy
-from calendar import day_abbr
 import os
-from re import T
-from socketserver import DatagramRequestHandler
 import sys
 import time
-from traceback import print_tb
 
 import pandas as pd
 import numpy as np
@@ -29,20 +22,13 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from models.modeling_jointbert import JointBERT
 from models.TFToIntent import Model
 
-#from torchsampler import ImbalancedDatasetSampler
 from transformers import AutoModelForSequenceClassification, BertTokenizer, BertModel, BertConfig, AdamW, get_linear_schedule_with_warmup, BertConfig
 
-from utils.metrics import Metrics
-from utils.prepare_dataset import load_and_cache_examples
 from utils.data_loader_ATIS_SNIPS import CustomDataset
-
-#from utils.prepare import DataTransform
-from utils.EarlyStopping import EarlyStopping
-from hyperpyyaml import load_hyperpyyaml
-import speechbrain as sb
 
 CUDA_LAUNCH_BLOCKING=1
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 class Trainer:
     def __init__(self, args, model) -> None:
